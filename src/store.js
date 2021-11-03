@@ -1,6 +1,7 @@
 import { getStorageItem, setStorageItem } from "./utils.js";
 
-let store = [];
+let store = getStorageItem("store");
+
 const setupStore = (productsData) => {
     store = productsData.map((product) => {
         const {
@@ -28,7 +29,10 @@ const setupStore = (productsData) => {
             image,
         };
     });
+    setStorageItem("store", store);
 };
+
+console.log(store);
 
 const findProduct = () => {};
 

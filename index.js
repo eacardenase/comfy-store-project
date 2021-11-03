@@ -13,7 +13,7 @@ const init = async () => {
     if (productsData) {
         // add products to the store
         setupStore(productsData);
-        console.log(store);
+        // console.log(store);
     }
 };
 
