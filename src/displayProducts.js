@@ -15,7 +15,7 @@ const display = (arrayOfProducts, element) => {
                             alt="${name}"
                         />
                         <div class="product-icons">
-                            <a href="./products.html?id=${id}" class="product-icon">
+                            <a href="./product.html?id=${id}" class="product-icon">
                                 <i class="fas fa-search"></i>
                             </a>
                             <button
