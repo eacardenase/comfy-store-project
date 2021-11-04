@@ -28,10 +28,14 @@ export const addToCart = (id) => {
         addToCartDOM(product);
     } else {
         // update values
-        console.log(cartData);
+        const productCartAmount = increaseAmount(id);
+        const items = [...cartItemsDOM.querySelectorAll(".cart-item-amount")];
+
+        const newAmount = items.find((item) => item.dataset.id === id);
+
+        newAmount.textContent = productCartAmount;
     }
 
-    // waiting...
     // add +1 to the item account
     displayCartItemCount();
     // calculate and display the total price of the car
@@ -59,6 +63,18 @@ function setupCartFunctionality() {}
 
 function displayCartItemsDOM() {
     cartData.forEach((cardProduct) => addToCartDOM(cardProduct));
+}
+
+function increaseAmount(id) {
+    let newAmount;
+    const cart = cartData.map((cartItem) => {
+        if (cartItem.id === id) {
+            cartItem.amount++;
+            newAmount = cartItem.amount;
+        }
+        return cartItem;
+    });
+    return newAmount;
 }
 
 const init = () => {
