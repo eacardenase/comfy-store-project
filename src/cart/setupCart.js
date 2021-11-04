@@ -32,8 +32,28 @@ export const addToCart = (id) => {
     }
 
     // waiting...
+    // add +1 to the item account
+    displayCartItemCount();
+    // calculate and display the total price of the car
+    displayCartTotalPrice();
+    // set car in local storage
+    setStorageItem("cart", cartData);
     openCart();
 };
+
+function displayCartItemCount() {
+    const amount = cartData.reduce((total, cartItem) => {
+        return (total += cartItem.amount);
+    }, 0);
+    cartItemCountDOM.textContent = amount;
+}
+
+function displayCartTotalPrice() {
+    const totalPrice = cartData.reduce((total, cartItem) => {
+        return (total += cartItem.price * cartItem.amount);
+    }, 0);
+    cartTotalDOM.textContent = `Total: ${formatPrice(totalPrice)}`;
+}
 
 const init = () => {
     console.log(cartData);
