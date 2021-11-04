@@ -34,6 +34,13 @@ const display = (arrayOfProducts, element) => {
         `;
         })
         .join("");
+
+    element.addEventListener("click", (event) => {
+        const product = event.target.parentElement;
+        if (product.classList.contains("product-cart-btn")) {
+            addToCart(product.dataset.id);
+        }
+    });
 };
 
 export default display;
