@@ -22,7 +22,7 @@ const setupPrice = (store) => {
             (product) => product.price / 100 <= priceFilterValue
         );
 
-        display(filteredStore, getElement(".products-container"));
+        display(filteredStore, getElement(".products-container"), true);
 
         if (filteredStore < 1) {
             const products = getElement(".products-container");

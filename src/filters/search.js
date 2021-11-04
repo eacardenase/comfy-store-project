@@ -24,7 +24,7 @@ const setupSearch = (store) => {
                 productsContainer.innerHTML = `<h3 class="filter-error">sorry, no products matched your search</h3>`;
             }
         } else {
-            display(store, getElement(".products-container"));
+            display(store, getElement(".products-container"), true);
         }
     });
 };

@@ -1,7 +1,7 @@
 import { formatPrice } from "./utils.js";
 import { addToCart } from "./cart/setupCart.js";
 
-const display = (arrayOfProducts, element) => {
+const display = (arrayOfProducts, element, filters) => {
     // display products
     element.innerHTML = arrayOfProducts
         .map((product) => {
@@ -34,6 +34,10 @@ const display = (arrayOfProducts, element) => {
         `;
         })
         .join("");
+
+    if (filters) {
+        return;
+    }
 
     element.addEventListener("click", (event) => {
         const product = event.target.parentElement;
