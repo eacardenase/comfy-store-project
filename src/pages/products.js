@@ -17,5 +17,9 @@ import { getElement } from "../utils.js";
 const loadingPage = getElement(".page-loading");
 
 display(store, getElement(".products-container"));
+
+// filters
 setupSearch(store);
+setupCompanies(store);
+
 loadingPage.style.display = "none";
