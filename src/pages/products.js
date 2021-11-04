@@ -21,5 +21,6 @@ display(store, getElement(".products-container"));
 // filters
 setupSearch(store);
 setupCompanies(store);
+setupPrice(store);
 
 loadingPage.style.display = "none";
