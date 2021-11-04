@@ -59,7 +59,46 @@ function displayCartTotalPrice() {
     cartTotalDOM.textContent = `Total: ${formatPrice(totalPrice)}`;
 }
 
-function setupCartFunctionality() {}
+function removeItem(id) {
+    cartData = cartData.filter((product) => product.id !== id);
+}
+
+function setupCartFunctionality() {
+    cartItemsDOM.addEventListener("click", (event) => {
+        const element = event.target;
+        const parent = element.parentElement;
+        const productID = element.dataset.id;
+        const parentID = parent.dataset.id;
+
+        // remove
+        if (element.classList.contains("cart-item-remove-btn")) {
+            removeItem(productID);
+            parent.parentElement.remove();
+        }
+
+        // increase
+        if (parent.classList.contains("cart-item-increase-btn")) {
+            const newAmount = increaseAmount(parentID);
+            parent.nextElementSibling.textContent = newAmount;
+        }
+
+        // decrease
+        if (parent.classList.contains("cart-item-decrease-btn")) {
+            const newAmount = decreaseAmount(parentID);
+
+            if (newAmount === 0) {
+                removeItem(parentID);
+                parent.parentElement.parentElement.remove();
+            } else {
+                parent.previousElementSibling.textContent = newAmount;
+            }
+        }
+
+        displayCartItemCount();
+        displayCartTotalPrice();
+        setStorageItem("cart", cartData);
+    });
+}
 
 function displayCartItemsDOM() {
     cartData.forEach((cardProduct) => addToCartDOM(cardProduct));
@@ -70,6 +109,18 @@ function increaseAmount(id) {
     const cart = cartData.map((cartItem) => {
         if (cartItem.id === id) {
             cartItem.amount++;
+            newAmount = cartItem.amount;
+        }
+        return cartItem;
+    });
+    return newAmount;
+}
+
+function decreaseAmount(id) {
+    let newAmount;
+    const cart = cartData.map((cartItem) => {
+        if (cartItem.id === id) {
+            cartItem.amount--;
             newAmount = cartItem.amount;
         }
         return cartItem;
